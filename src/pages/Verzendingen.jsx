@@ -11,7 +11,7 @@ function Verzendingen() {
 
       <p style={{ color: '#6b7280' }}>
         Hier komt straks een lijst met zendingen, filters (bestemming, status) en een knop
-        “Nieuwe zending aanmaken”.
+        "Nieuwe zending aanmaken".
       </p>
     </div>
   );
