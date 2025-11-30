@@ -1,39 +1,21 @@
 // src/App.jsx
-
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Postbrievenbus from "./pages/Postbrievenbus";
 
-import "./App.css";
-
-// Pagina's
-import Dashboard from "./pages/Dashboard.jsx";
-import Postbrievenbus from "./pages/Postbrievenbus.jsx";
-import Verzendingen from "./pages/Verzendingen.jsx";
-import Financien from "./pages/Financien.jsx";
-import Rapportages from "./pages/Rapportages.jsx";
-import DashboardB from "./pages/DashboardB.jsx"; // extra versie van het dashboard
-
-function App() {
+export default function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        {/* Hoofd-dashboard (tegels) */}
         <Route path="/" element={<Dashboard />} />
-
-        {/* Tweede dashboard-versie (B) */}
-        <Route path="/dashboardb" element={<DashboardB />} />
-
-        {/* Overige pagina's */}
         <Route path="/postbrievenbus" element={<Postbrievenbus />} />
-        <Route path="/verzendingen" element={<Verzendingen />} />
-        <Route path="/financien" element={<Financien />} />
-        <Route path="/rapportages" element={<Rapportages />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
-export default App;
+
 
 
 
