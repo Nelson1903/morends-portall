@@ -1,135 +1,142 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+// src/pages/DashboardB.jsx
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function DashboardB() {
+export default function DashboardB({ user, onLogout }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="dashboard-page">
-      {/* Bovenbalk */}
-      <header className="dashboard-topbar">
-        <div className="dashboard-topbar-left">
-          <div className="dashboard-logo-circle">M</div>
-          <div className="dashboard-title">
-            <h1>Morends Portal</h1>
-            <p>Intern dashboard voor Morends B.V. – Rotterdam</p>
-          </div>
+    <div className="min-h-screen bg-slate-100 px-6 py-8">
+      {/* Header */}
+      <header className="mx-auto max-w-6xl mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900">
+            Morends Portal
+          </h1>
+          <p className="text-sm text-slate-600">
+            Intern dashboard voor Morends B.V. – Rotterdam
+          </p>
+          {user?.email && (
+            <p className="mt-1 text-xs text-slate-500">
+              Ingelogd als: <span className="font-medium">{user.email}</span>
+            </p>
+          )}
         </div>
 
-        <div className="dashboard-user">
-          <span className="dashboard-user-name">Ingelogd: Nelson</span>
-          <button className="dashboard-logout-button" type="button">
-            Uitloggen
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={onLogout}
+          className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-xs font-medium text-white hover:bg-slate-800"
+        >
+          Afmelden
+        </button>
       </header>
 
-      {/* Hoofdcontent */}
-      <main className="dashboard-main">
-        {/* Stat-kaarten bovenaan */}
-        <section className="dashboard-stats">
-          <div className="stat-card">
-            <span className="stat-label">Vandaag</span>
-            <p className="stat-value">12 nieuwe zendingen</p>
-            <p className="stat-caption">Laatste update: 10:32 uur</p>
-          </div>
-
-          <div className="stat-card">
-            <span className="stat-label">Postbox</span>
-            <p className="stat-value">34 actieve klanten</p>
-            <p className="stat-caption">Morends Postbrievenbus</p>
-          </div>
-
-          <div className="stat-card">
-            <span className="stat-label">Open taken</span>
-            <p className="stat-value">7 nog te doen</p>
-            <p className="stat-caption">Team & interne opvolging</p>
-          </div>
-
-          <div className="stat-card">
-            <span className="stat-label">Notities</span>
-            <p className="stat-value">Klik op een tegel</p>
-            <p className="stat-caption">Open een module voor meer details</p>
-          </div>
-        </section>
-
+      <main className="mx-auto max-w-6xl space-y-8">
         {/* Tegels */}
-        <section className="dashboard-tiles">
-          <Tile
-            title="Postbrievenbus"
-            description="Overzicht van alle postbox-klanten en inkomende post."
-            status="Actief"
-            statusVariant="green"
-            to="/postbrievenbus"
-          />
+        <section>
+          <h2 className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">
+            Modules
+          </h2>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {/* Postbrievenbus */}
+            <button
+              type="button"
+              onClick={() => navigate("/postbrievenbus")}
+              className="group flex flex-col items-start justify-between rounded-2xl border border-slate-100 bg-white p-5 text-left shadow-sm hover:border-slate-300 hover:shadow-md transition"
+            >
+              <div>
+                <p className="text-xs font-semibold uppercase text-slate-500">
+                  Postbrievenbus
+                </p>
+                <p className="mt-1 text-sm font-medium text-slate-900">
+                  Beheer postbussen
+                </p>
+                <p className="mt-1 text-xs text-slate-500">
+                  Ingekomen post, digitale en fysieke postbussen.
+                </p>
+              </div>
+              <span className="mt-4 inline-flex items-center text-xs font-medium text-slate-700 group-hover:text-slate-900">
+                Openen
+                <span className="ml-1">→</span>
+              </span>
+            </button>
 
-          <Tile
-            title="Zendingen & Export"
-            description="Boekingen, labels en status van zendingen naar Suriname en ABC."
-            status="Actief"
-            statusVariant="green"
-            to="/verzendingen"
-          />
+            {/* Verzendingen */}
+            <button
+              type="button"
+              onClick={() => navigate("/verzending")}
+              className="group flex flex-col items-start justify-between rounded-2xl border border-slate-100 bg-white p-5 text-left shadow-sm hover:border-slate-300 hover:shadow-md transition"
+            >
+              <div>
+                <p className="text-xs font-semibold uppercase text-slate-500">
+                  Verzendingen
+                </p>
+                <p className="mt-1 text-sm font-medium text-slate-900">
+                  Zendingen & status
+                </p>
+                <p className="mt-1 text-xs text-slate-500">
+                  Overzicht van alle zendingen, routes en statussen.
+                </p>
+              </div>
+              <span className="mt-4 inline-flex items-center text-xs font-medium text-slate-700 group-hover:text-slate-900">
+                Openen
+                <span className="ml-1">→</span>
+              </span>
+            </button>
 
-          <Tile
-            title="Magazijn & Voorraad"
-            description="Binnengekomen pallets, dozen en locatie in het magazijn."
-            status="In voorbereiding"
-            statusVariant="yellow"
-          />
+            {/* Rapportages */}
+            <button
+              type="button"
+              onClick={() => navigate("/rapportages")}
+              className="group flex flex-col items-start justify-between rounded-2xl border border-slate-100 bg-white p-5 text-left shadow-sm hover:border-slate-300 hover:shadow-md transition"
+            >
+              <div>
+                <p className="text-xs font-semibold uppercase text-slate-500">
+                  Rapportages
+                </p>
+                <p className="mt-1 text-sm font-medium text-slate-900">
+                  Overzicht & KPI&apos;s
+                </p>
+                <p className="mt-1 text-xs text-slate-500">
+                  Basale rapportages voor operationele sturing.
+                </p>
+              </div>
+              <span className="mt-4 inline-flex items-center text-xs font-medium text-slate-700 group-hover:text-slate-900">
+                Openen
+                <span className="ml-1">→</span>
+              </span>
+            </button>
 
-          <Tile
-            title="Financiën & Facturen"
-            description="Facturen, betaalstatus en rapportages per klant / eiland."
-            status="In voorbereiding"
-            statusVariant="yellow"
-            to="/financien"
-          />
-
-          <Tile
-            title="Klantenservice"
-            description="Klantencontact, vragen, klachten en terugbelverzoeken."
-            status="Actief"
-            statusVariant="green"
-          />
-
-          <Tile
-            title="Team & Taken"
-            description="Dagelijkse taken, overdrachten en planningen per medewerker."
-            status="Actief"
-            statusVariant="green"
-          />
+            {/* Instellingen */}
+            <button
+              type="button"
+              onClick={() => navigate("/instellingen")}
+              className="group flex flex-col items-start justify-between rounded-2xl border border-slate-100 bg-white p-5 text-left shadow-sm hover:border-slate-300 hover:shadow-md transition"
+            >
+              <div>
+                <p className="text-xs font-semibold uppercase text-slate-500">
+                  Instellingen
+                </p>
+                <p className="mt-1 text-sm font-medium text-slate-900">
+                  Portal & gebruikers
+                </p>
+                <p className="mt-1 text-xs text-slate-500">
+                  Basisinstellingen en gebruikersbeheer (in opbouw).
+                </p>
+              </div>
+              <span className="mt-4 inline-flex items-center text-xs font-medium text-slate-700 group-hover:text-slate-900">
+                Openen
+                <span className="ml-1">→</span>
+              </span>
+            </button>
+          </div>
         </section>
       </main>
     </div>
   );
 }
 
-function Tile({ title, description, status, statusVariant, to }) {
-  const content = (
-    <>
-      <div className="tile-header">
-        <h2>{title}</h2>
-        {status && (
-          <span className={`tile-status tile-status-${statusVariant}`}>
-            {status}
-          </span>
-        )}
-      </div>
-      <p className="tile-description">{description}</p>
-      {to && <span className="tile-link">Openen</span>}
-    </>
-  );
 
-  if (to) {
-    return (
-      <Link to={to} className="dashboard-tile">
-        {content}
-      </Link>
-    );
-  }
-
-  return <div className="dashboard-tile">{content}</div>;
-}
-
-export default DashboardB;
 
 
